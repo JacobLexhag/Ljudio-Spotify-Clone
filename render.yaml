@@ -4,7 +4,7 @@ services:
     runtime: node
     plan: free
     branch: main
-    buildCommand: cd client && npm install --legacy-peer-deps && npm run build && cd ../server && npm install
+    buildCommand: cd client && rm -rf node_modules package-lock.json && npm install && npm run build && cd ../server && npm install
     startCommand: cd server && npm start
     healthCheckPath: /api/login
     envVars:
