@@ -8,7 +8,7 @@ services:
       cd client && 
       rm -rf node_modules package-lock.json &&
       npm install &&
-      npm install -D vite@latest @vitejs/plugin-vue@latest &&
+      npm install -D vite@^2.5.4 @vitejs/plugin-vue@^1.6.1 &&
       NODE_ENV=production VITE_API_URL=$RENDER_EXTERNAL_URL npx vite build &&
       cd ../server &&
       rm -rf node_modules package-lock.json &&
