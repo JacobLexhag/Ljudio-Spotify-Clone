@@ -7,7 +7,8 @@ services:
     buildCommand: |
       cd client && 
       npm install && 
-      VITE_API_URL=$RENDER_EXTERNAL_URL npm run build && 
+      npm install vite @vitejs/plugin-vue &&
+      VITE_API_URL=$RENDER_EXTERNAL_URL npx vite build && 
       cd ../server && 
       npm install
     startCommand: cd server && npm start
