@@ -1,10 +1,10 @@
 services:
   - type: web
-    name: ljudio-server
+    name: ljudio
     runtime: node
     plan: free
     branch: main
-    buildCommand: cd server && npm install
+    buildCommand: cd client && npm install && npm run build && cd ../server && npm install
     startCommand: cd server && npm start
     healthCheckPath: /api/login
     envVars:
@@ -16,16 +16,6 @@ services:
         fromDatabase:
           name: ljudio-db
           property: connectionString
-
-  - type: web
-    name: ljudio-client
-    runtime: node
-    buildCommand: cd client && npm install && npm run build
-    startCommand: npx serve -s client/dist
-    branch: main
-    envVars:
-      - key: VITE_API_URL
-        value: https://ljudio-server.onrender.com
 
 databases:
   - name: ljudio-db

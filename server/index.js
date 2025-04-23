@@ -3,6 +3,7 @@ const session = require("express-session");
 const crypto = require("crypto");
 const { sequelize } = require("./models.js");
 const models = require("./models.js");
+const path = require("path");
 
 const app = express();
 app.use(express.json());
@@ -31,6 +32,16 @@ async function startServer() {
 
     rest(app, models);
     auth(app, models);
+
+    // Serve static files from the client build directory
+    app.use(express.static(path.join(__dirname, "../client/dist")));
+
+    // Handle client-side routing by serving index.html for all non-API routes
+    app.get("*", (req, res) => {
+      if (!req.path.startsWith("/api/")) {
+        res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+      }
+    });
 
     const PORT = process.env.PORT || 3001;
     app.listen(PORT, () => {
