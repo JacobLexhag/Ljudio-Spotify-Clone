@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "add": "^2.0.6",
+    "serve": "^14.2.4",
     "vue": "^3.2.14",
     "vue-marmoset-viewer": "^2.0.2",
     "vue-mobile-sized-view": "^0.1.1",
