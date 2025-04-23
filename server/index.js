@@ -16,8 +16,11 @@ app.use(
     saveUninitialized: false,
     cookie: {
       secure: process.env.NODE_ENV === "production",
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
       maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      httpOnly: true,
     },
+    proxy: process.env.NODE_ENV === "production",
   })
 );
 
@@ -49,6 +52,7 @@ async function startServer() {
     });
   } catch (error) {
     console.error("Unable to start server:", error);
+    process.exit(1);
   }
 }
 
